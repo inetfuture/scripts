@@ -40,6 +40,7 @@ class Script {
       return {
         content: {
           username: 'jenkins',
+          icon_url: 'http://ci.baomiding.com/favicon.ico',
           attachments: [{
             title: `Job "${body.name}" completed with result ${body.build.status || 'STARTED'}`,
             title_link: body.build.full_url,
@@ -68,9 +69,183 @@ class Script {
       return {
         content: {
           username: 'pgyer',
+          icon_url: 'http://www.pgyer.com/favicon.ico',
           attachments: [{
             title: `${body.device_type} App "${body.title}" has a new version ${body.os_version}`,
             title_link: body.link,
+            color
+          }]
+        }
+      };
+    }
+
+    // {
+    //   // The account connected to the event (always present)
+    //   account: {
+    //     // The ID of the account (always present)
+    //     id: "56b9ca7f17025f8756f69054",
+    //     // The name of the account (always present)
+    //     name: "My Company",
+    //     // The URL to the account (always present)
+    //     url: "https://app.bugsnag.com/accounts/my-company"
+    //   },
+    //   // The project connected to the event (always present)
+    //   project: {
+    //     // The ID of the project (always present)
+    //     id: "56b9ca7f17025f8756f69054",
+    //     // The name of the project (always present)
+    //     name: "My Test Project",
+    //     // The URL to the project (always present)
+    //     url: "https://app.bugsnag.com/my-company/my-test-project"
+    //   },
+    //   // The reason why the payload was fired (always present)
+    //   trigger: {
+    //       // The type of trigger sent (always present)
+    //       // - "firstException"         A new error is created from a new exception
+    //       // - "powerTen"               An error occurs frequently
+    //       // - "exception"              Every time an exception is received
+    //       // - "reopened"               An error is automatically reopened
+    //       // - "projectSpiking"         A spike in exception in a project has been detected
+    //       // - "comment"                A comment is added to an error
+    //       // - "errorStateManualChange" A user has manually changed the state of an error
+    //       type: "exception",
+    //       // Detailed description of why the trigger was fired (always present)
+    //       message: "1000th exception",
+    //       // The snooze rule associated with the trigger, if applicable (optional).
+    //       // This can be the snooze rule that caused this event to occur if its reopened from
+    //       // archived, or the snooze rule connected to the user action of snoozing
+    //       // or cancelling a snooze.
+    //       snoozeRule: {
+    //           // The type of rule that (always present)
+    //           // - "occurrences"          An error as reoccurred a number of times
+    //           // - "occurrence_per_hour"  An error as reoccurred a number of times in an hour
+    //           // - "occurs_after"         An error as reoccurred after a period of time
+    //           type: "occurrences",
+    //           // The number of occurrences or minutes (always present)
+    //           ruleValue: 10
+    //       },
+    //       // The number of events that have occurred in the project of the spiking time,
+    //       // if the trigger is project spiking (optional)
+    //       rate: 5000,
+    //       // The state change that occurred if the trigger is a manual error state change (optional).
+    //       // This can be "fixed", "reopened", "snoozed", "snoozeCancelled", "ignored"
+    //       // and "unignored".
+    //       stateChange: ""
+    //   },
+    //   // The comment details if a comment was added (optional)
+    //   comment: {},
+    //   // The user that created the comment, if comment was added (optional)
+    //   user: {
+    //       // A unique identifier for a user who made the comment (always present)
+    //       id: "56b9ca7f17025f8756f69054",
+    //       // The user's name, or a string used to identify them (always present)
+    //       name: "Example User",
+    //       // The user's email address (always present)
+    //       email: "user@example.com"
+    //   },
+    //   // The event that caused this trigger to fire (always present)
+    //   error: {
+    //       // The ID of the event (always present)
+    //       id: "56b9ca7f17025f8756f69054",
+    //       // The ID of the error containing the event (always present)
+    //       errorId: "56b9ca7f17025f8756f69054",
+    //       // The name of the exception class from the event (always present)
+    //       exceptionClass: "NoMethodError",
+    //       // The message associated with the event (always present)
+    //       message: "Unable to connect to database.",
+    //       // A string representing what was happening in the application at the
+    //       // time of the error (always present)
+    //       context: "auth/session#create",
+    //       // The app version when the event occurred (optional)
+    //       appVersion: "0.1.0",
+    //       // The release stage of the event (always present)
+    //       releaseStage: "development",
+    //       // The timestamp when the error was first created (always present)
+    //       firstReceived: "2015-11-27T15:26:11.000Z",
+    //       // The timestamp when this event was received (always present)
+    //       receivedAt: "2015-11-27T15:26:11.000Z",
+    //       // The request URL that caused the exception (optional)
+    //       requestUrl: "http://localhost:3000/admin/raise_exception",
+    //       // The user ID connected to the event (optional)
+    //       userId: "5642494942656e7eac000004",
+    //       // The bugsnag URL to the event (always present)
+    //       url: "https://app.bugsnag.com/my-company/my-test-project/errors/56b9ca7f17025f8756f69054?event_id=56b9ca7f17025f8756f69054",
+    //       // The severity of the error (always present)
+    //       // - "error"   used when the app crashes
+    //       // - "warning" used when Bugsnag.notify is called
+    //       // - "info"    can be used in manual Bugsnag.notify calls
+    //       severity: "error",
+    //       // If there is a linked issue in an issue tracker then the details
+    //       // will be given here (optional)
+    //       createdIssue: {
+    //           // The ID of the issue in the issue tracker (optional)
+    //           id: "BUG123",
+    //           // The number of the issue in the issue tracker (optional)
+    //           number: 3,
+    //           // The name of the issue tracker (always present)
+    //           type: "bugify",
+    //           // The url to view the issue (always present)
+    //           url: "http://demo.bugify.com/issues/3",
+    //       },
+    //       // An object containing any further data attached to this
+    //       // error event (optional)
+    //       metaData: {
+    //           // This is displayed as the first tab after the stacktrace on the
+    //           // Bugsnag website (optional)
+    //           someData: {
+    //               // A key value pair that is be displayed in the first tab (optional)
+    //               key: "value",
+    //               // This is shown as a section within the first tab (optional)
+    //               setOfKeys: {
+    //                   key: "value",
+    //                   key2: "value"
+    //               }
+    //           },
+    //           // This would be the second tab on the Bugsnag website (optional)
+    //           someMoreData: {
+    //               ...
+    //           }
+    //       },
+    //       // An array of stacktrace objects. Each object represents one line
+    //       // in the exception's stacktrace (optional)
+    //       stackTrace: [{
+    //           // Whether or not this line is in the user's project code (always present)
+    //           inProject: true,
+    //           // The line of the file that this frame of the stack was in (optional)
+    //           lineNumber: 1234,
+    //           // The column of the file that this frame of the stack was in (optional)
+    //           columnNumber: 123,
+    //           // The file that this stack frame was executing (optional)
+    //           file: "controllers/auth/session_controller.rb",
+    //           // The method that this particular stack frame is within (optional)
+    //           method: "create",
+    //           // The code in this file surrounding this line, up to three lines
+    //           // either side of the line that caused the problem (optional)
+    //           code: {
+    //               1231: "  def a",
+    //               1232: "",
+    //               1233: "    if problem?",
+    //               1234: "      raise 'something went wrong'",
+    //               1235: "    end"
+    //               1236: "",
+    //               1237: "  end"
+    //           }
+    //       }]
+    //     }
+    //   }
+
+    if (body.account && body.project && body.trigger) {
+      if (body.trigger.type !== 'comment' && body.trigger.type !== 'errorStateManualChange') {
+        color = redColor;
+      }
+
+      return {
+        content: {
+          username: 'bugsnag',
+          icon_url: 'https://bugsnag.com/favicon.ico',
+          attachments: [{
+            title: `${body.account.name}/${body.project.name} has new "${body.trigger.type}" event with message "${body.trigger.message}"`,
+            title_link: body.error && body.error.url || body.project.url,
             color
           }]
         }
@@ -85,6 +260,7 @@ class Script {
       return {
         content: {
           username: 'zabbix',
+          icon_url: 'https://monitor.baomiding.com/favicon.ico',
           attachments: [{
             title: `Trigger "${body.trigger}" status changed to ${body.status}`,
             title_link: 'http://monitor.baomiding.com/tr_status.php?ddreset=1',
