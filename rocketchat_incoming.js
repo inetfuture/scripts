@@ -244,7 +244,7 @@ class Script {
           username: 'bugsnag',
           icon_url: 'https://bugsnag.com/favicon.ico',
           attachments: [{
-            title: `${body.account.name}/${body.project.name} has new "${body.trigger.type}" event with message "${body.trigger.message}"`,
+            title: `Project ${body.account.name}/${body.project.name} has a new "${body.trigger.type}" event with message "${body.trigger.message}"`,
             title_link: body.error && body.error.url || body.project.url,
             color
           }]
@@ -268,6 +268,59 @@ class Script {
           }]
         }
       }
+    }
+
+    // {
+    //   "object_kind": "tag_push",
+    //   "before": "0000000000000000000000000000000000000000",
+    //   "after": "09bdc2c14f276e792a110df1910ee5350a0f2f52",
+    //   "ref": "refs/tags/t3",
+    //   "checkout_sha": "09bdc2c14f276e792a110df1910ee5350a0f2f52",
+    //   "message": null,
+    //   "user_id": 1,
+    //   "user_name": "Aaron Wang",
+    //   "user_email": "aaron.wang@augmentum.com",
+    //   "project_id": 24,
+    //   "repository": {
+    //     "name": "Misc Tests",
+    //     "url": "git@git.augmentum.com.cn:aaron.wang/misc-tests.git",
+    //     "description": "",
+    //     "homepage": "http://git.augmentum.com.cn/aaron.wang/misc-tests",
+    //     "git_http_url": "http://git.augmentum.com.cn/aaron.wang/misc-tests.git",
+    //     "git_ssh_url": "git@git.augmentum.com.cn:aaron.wang/misc-tests.git",
+    //     "visibility_level": 0
+    //   },
+    //   "commits": [
+    //     {
+    //       "id": "09bdc2c14f276e792a110df1910ee5350a0f2f52",
+    //       "message": "asdg fix issue #2\n",
+    //       "timestamp": "2015-12-16T15:41:54+08:00",
+    //       "url": "http://git.augmentum.com.cn/aaron.wang/misc-tests/commit/09bdc2c14f276e792a110df1910ee5350a0f2f52",
+    //       "author": {
+    //         "name": "inetfuture(Aaron Wang)",
+    //         "email": "inetfuture@gmail.com"
+    //       },
+    //       "added": [
+    //         "kkk"
+    //       ],
+    //       "modified": [],
+    //       "removed": []
+    //     }
+    //   ],
+    //   "total_commits_count": 1
+    // }
+    if (body.object_kind === 'tag_push') {
+      return {
+        content: {
+          username: 'gitlab',
+          icon_url: 'http://git.augmentum.com.cn/favicon.ico',
+          attachments: [{
+            title: `Repository "${body.repository.name}" has a new tag ${body.ref.replace('refs/tags/', '')}`,
+            title_link: `${body.repository.homepage}/tags`,
+            color
+          }]
+        }
+      };
     }
 
     return {
