@@ -233,19 +233,21 @@ class Script {
     //       }]
     //     }
     //   }
-
     if (body.account && body.project && body.trigger) {
       if (body.trigger.type !== 'comment' && body.trigger.type !== 'errorStateManualChange') {
         color = redColor;
       }
+
+      const project = `${body.account.name}/${body.project.name}`;
+      const message = (body.error && body.error.message) || body.trigger.message;
 
       return {
         content: {
           username: 'bugsnag',
           icon_url: 'https://bugsnag.com/favicon.ico',
           attachments: [{
-            title: `Project ${body.account.name}/${body.project.name} has a new "${body.trigger.type}" event with message "${body.trigger.message}"`,
-            title_link: body.error && body.error.url || body.project.url,
+            title: `Project ${project} has a new "${body.trigger.type}" event with message "${message}"`,
+            title_link: (body.error && body.error.url) || body.project.url,
             color
           }]
         }
