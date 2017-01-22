@@ -40,7 +40,7 @@ class Script {
       return {
         content: {
           username: 'jenkins',
-          icon_url: 'http://ci.baomiding.com/favicon.ico',
+          icon_url: 'https://jenkins.io/sites/default/files/jenkins_favicon.ico',
           attachments: [{
             title: `Job "${body.name}" completed with result ${body.build.status || 'STARTED'}`,
             title_link: body.build.full_url,
@@ -262,10 +262,10 @@ class Script {
       return {
         content: {
           username: 'zabbix',
-          icon_url: 'https://monitor.baomiding.com/favicon.ico',
+          icon_url: 'http://www.zabbix.com/favicon.ico',
           attachments: [{
             title: `Trigger "${body.trigger}" status changed to ${body.status}`,
-            title_link: 'http://monitor.baomiding.com/tr_status.php?ddreset=1',
+            title_link: 'https://monitor.baomiding.com/tr_status.php?ddreset=1',
             color
           }]
         }
@@ -315,7 +315,7 @@ class Script {
       return {
         content: {
           username: 'gitlab',
-          icon_url: 'http://git.augmentum.com.cn/favicon.ico',
+          icon_url: 'https://gitlab.com/favicon.ico',
           attachments: [{
             title: `Repository "${body.repository.name}" has a new tag ${body.ref.replace('refs/tags/', '')}`,
             title_link: `${body.repository.homepage}/tags`,
