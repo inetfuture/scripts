@@ -265,7 +265,6 @@ class Script {
           icon_url: 'http://www.zabbix.com/favicon.ico',
           attachments: [{
             title: `Trigger "${body.trigger}" status changed to ${body.status}`,
-            title_link: 'https://monitor.baomiding.com/tr_status.php?ddreset=1',
             color
           }]
         }
